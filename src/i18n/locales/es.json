@@ -1,4 +1,30 @@
 {
+  "nav": {
+    "today": "Hoy",
+    "orders": "Pedidos",
+    "gangSheets": "Hojas de prensado",
+    "production": "Producción",
+    "inventory": "Inventario",
+    "shipping": "Envíos",
+    "listings": "Anuncios",
+    "analytics": "Analítica",
+    "assistant": "Asistente",
+    "settings": "Configuración"
+  },
+  "orderState": {
+    "imported": "Importado",
+    "needs_mapping": "Necesita mapeo",
+    "ready": "Listo",
+    "needs_artwork": "Necesita arte",
+    "on_sheet": "En hoja",
+    "transfer_in": "Transferencia recibida",
+    "pressed": "Prensado",
+    "packed": "Empacado",
+    "shipped": "Enviado",
+    "delivered": "Entregado",
+    "on_hold": "En espera",
+    "cancelled": "Cancelado"
+  },
   "station": {
     "pick": "Recoger",
     "press": "Prensar",
@@ -7,8 +33,33 @@
   },
   "scan": {
     "ready": "Escanea una transferencia",
-    "match": "Correcto: pr\u00e9nsalo",
-    "mismatch": "Alto: art\u00edculo incorrecto",
-    "offline": "Sin conexi\u00f3n: se sincronizar\u00e1"
+    "match": "Correcto: prénsalo",
+    "mismatch": "Alto: artículo incorrecto",
+    "offline": "Sin conexión: se sincronizará"
+  },
+  "action": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "close": "Cerrar",
+    "retry": "Reintentar",
+    "loadMore": "Cargar más",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "print": "Imprimir",
+    "logOut": "Cerrar sesión"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "error": "Algo salió mal",
+    "noResults": "Sin resultados",
+    "offline": "Sin conexión",
+    "online": "En línea"
   }
 }

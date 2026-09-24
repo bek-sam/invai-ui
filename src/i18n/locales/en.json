@@ -1,4 +1,30 @@
 {
+  "nav": {
+    "today": "Today",
+    "orders": "Orders",
+    "gangSheets": "Gang Sheets",
+    "production": "Production",
+    "inventory": "Inventory",
+    "shipping": "Shipping",
+    "listings": "Listings",
+    "analytics": "Analytics",
+    "assistant": "Assistant",
+    "settings": "Settings"
+  },
+  "orderState": {
+    "imported": "Imported",
+    "needs_mapping": "Needs mapping",
+    "ready": "Ready",
+    "needs_artwork": "Needs artwork",
+    "on_sheet": "On sheet",
+    "transfer_in": "Transfer in",
+    "pressed": "Pressed",
+    "packed": "Packed",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "on_hold": "On hold",
+    "cancelled": "Cancelled"
+  },
   "station": {
     "pick": "Pick",
     "press": "Press",
@@ -10,5 +36,30 @@
     "match": "Match: press it",
     "mismatch": "Stop: wrong item",
     "offline": "Offline: scans will sync"
+  },
+  "action": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "retry": "Retry",
+    "loadMore": "Load more",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "print": "Print",
+    "logOut": "Log out"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "noResults": "No results",
+    "offline": "Offline",
+    "online": "Online"
   }
 }
