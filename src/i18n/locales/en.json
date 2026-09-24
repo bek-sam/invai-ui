@@ -1,0 +1,14 @@
+{
+  "station": {
+    "pick": "Pick",
+    "press": "Press",
+    "qc": "Quality check",
+    "pack": "Pack"
+  },
+  "scan": {
+    "ready": "Scan a transfer",
+    "match": "Match: press it",
+    "mismatch": "Stop: wrong item",
+    "offline": "Offline: scans will sync"
+  }
+}

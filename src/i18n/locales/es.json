@@ -1,0 +1,14 @@
+{
+  "station": {
+    "pick": "Recoger",
+    "press": "Prensar",
+    "qc": "Control de calidad",
+    "pack": "Empacar"
+  },
+  "scan": {
+    "ready": "Escanea una transferencia",
+    "match": "Correcto: pr\u00e9nsalo",
+    "mismatch": "Alto: art\u00edculo incorrecto",
+    "offline": "Sin conexi\u00f3n: se sincronizar\u00e1"
+  }
+}
