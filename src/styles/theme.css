@@ -1,27 +1,138 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * InvAI theme tokens (Tailwind v4 @theme).
+ * Palette: neutral base + one brand accent (deep teal), status colors for
+ * order-item states, channel badges and shared UI (success/warning/danger/info).
+ * Light mode is the default; dark mode activates on the `dark` class OR
+ * `prefers-color-scheme: dark` when no explicit `data-theme` is set.
+ */
 
 @theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
   --color-background: oklch(1 0 0);
   --color-foreground: oklch(0.2 0.01 260);
-  --color-primary: oklch(0.45 0.16 260);
+
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.2 0.01 260);
+
+  --color-popover: oklch(1 0 0);
+  --color-popover-foreground: oklch(0.2 0.01 260);
+
+  --color-muted: oklch(0.96 0.005 260);
+  --color-muted-foreground: oklch(0.48 0.01 260);
+
+  /* Brand accent: deep teal */
+  --color-primary: oklch(0.42 0.09 195);
   --color-primary-foreground: oklch(0.98 0 0);
+
   --color-secondary: oklch(0.95 0.01 260);
   --color-secondary-foreground: oklch(0.25 0.01 260);
+
+  --color-accent: oklch(0.95 0.02 195);
+  --color-accent-foreground: oklch(0.25 0.05 195);
+
   --color-destructive: oklch(0.55 0.2 27);
   --color-destructive-foreground: oklch(0.98 0 0);
-  --color-accent: oklch(0.95 0.01 260);
-  --color-input: oklch(0.9 0.01 260);
-  --color-ring: oklch(0.45 0.16 260);
-  --color-success: oklch(0.6 0.17 150);
+
+  --color-border: oklch(0.9 0.005 260);
+  --color-input: oklch(0.9 0.005 260);
+  --color-ring: oklch(0.42 0.09 195);
+
+  /* Status colors, shared by StatusBadge, ScanResult, StatCard tone, etc. */
+  --color-success: oklch(0.6 0.15 150);
+  --color-success-foreground: oklch(0.98 0 0);
+  --color-warning: oklch(0.75 0.16 80);
+  --color-warning-foreground: oklch(0.2 0.05 80);
+  --color-danger: oklch(0.55 0.2 27);
+  --color-danger-foreground: oklch(0.98 0 0);
+  --color-info: oklch(0.55 0.14 250);
+  --color-info-foreground: oklch(0.98 0 0);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
+/* Dark mode: explicit `dark` class (preferred, toggled by the apps) */
+:root.dark,
+:root[data-theme="dark"] {
+  --color-background: oklch(0.17 0.01 260);
+  --color-foreground: oklch(0.96 0 0);
+
+  --color-card: oklch(0.21 0.01 260);
+  --color-card-foreground: oklch(0.96 0 0);
+
+  --color-popover: oklch(0.21 0.01 260);
+  --color-popover-foreground: oklch(0.96 0 0);
+
+  --color-muted: oklch(0.26 0.01 260);
+  --color-muted-foreground: oklch(0.68 0.01 260);
+
+  --color-primary: oklch(0.7 0.11 195);
+  --color-primary-foreground: oklch(0.15 0.02 195);
+
+  --color-secondary: oklch(0.27 0.01 260);
+  --color-secondary-foreground: oklch(0.96 0 0);
+
+  --color-accent: oklch(0.28 0.03 195);
+  --color-accent-foreground: oklch(0.92 0.03 195);
+
+  --color-destructive: oklch(0.6 0.2 27);
+  --color-destructive-foreground: oklch(0.98 0 0);
+
+  --color-border: oklch(0.32 0.01 260);
+  --color-input: oklch(0.32 0.01 260);
+  --color-ring: oklch(0.7 0.11 195);
+
+  --color-success: oklch(0.68 0.15 150);
+  --color-success-foreground: oklch(0.15 0.03 150);
+  --color-warning: oklch(0.78 0.15 80);
+  --color-warning-foreground: oklch(0.2 0.05 80);
+  --color-danger: oklch(0.65 0.19 27);
+  --color-danger-foreground: oklch(0.98 0 0);
+  --color-info: oklch(0.68 0.13 250);
+  --color-info-foreground: oklch(0.15 0.03 250);
+}
+
+/* Follow the OS when the app hasn't set an explicit light/dark class. */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: oklch(0.18 0.01 260);
+  :root:not(.light):not([data-theme="light"]):not(.dark):not([data-theme="dark"]) {
+    --color-background: oklch(0.17 0.01 260);
     --color-foreground: oklch(0.96 0 0);
+    --color-card: oklch(0.21 0.01 260);
+    --color-card-foreground: oklch(0.96 0 0);
+    --color-popover: oklch(0.21 0.01 260);
+    --color-popover-foreground: oklch(0.96 0 0);
+    --color-muted: oklch(0.26 0.01 260);
+    --color-muted-foreground: oklch(0.68 0.01 260);
+    --color-primary: oklch(0.7 0.11 195);
+    --color-primary-foreground: oklch(0.15 0.02 195);
     --color-secondary: oklch(0.27 0.01 260);
     --color-secondary-foreground: oklch(0.96 0 0);
-    --color-accent: oklch(0.27 0.01 260);
+    --color-accent: oklch(0.28 0.03 195);
+    --color-accent-foreground: oklch(0.92 0.03 195);
+    --color-destructive: oklch(0.6 0.2 27);
+    --color-destructive-foreground: oklch(0.98 0 0);
+    --color-border: oklch(0.32 0.01 260);
     --color-input: oklch(0.32 0.01 260);
+    --color-ring: oklch(0.7 0.11 195);
+    --color-success: oklch(0.68 0.15 150);
+    --color-success-foreground: oklch(0.15 0.03 150);
+    --color-warning: oklch(0.78 0.15 80);
+    --color-warning-foreground: oklch(0.2 0.05 80);
+    --color-danger: oklch(0.65 0.19 27);
+    --color-danger-foreground: oklch(0.98 0 0);
+    --color-info: oklch(0.68 0.13 250);
+    --color-info-foreground: oklch(0.15 0.03 250);
   }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
 }
