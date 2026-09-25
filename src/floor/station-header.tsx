@@ -1,6 +1,7 @@
 import type { Station } from "@invai/contracts";
 import { Wifi, WifiOff } from "lucide-react";
 import type * as React from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "../lib/cn";
 
 export interface StationHeaderProps {
@@ -22,6 +23,7 @@ export function StationHeader({
   actions,
   className,
 }: StationHeaderProps) {
+  const { t } = useTranslation();
   return (
     <header
       className={cn(
@@ -42,7 +44,7 @@ export function StationHeader({
           )}
         >
           {online ? <Wifi className="size-5" /> : <WifiOff className="size-5" />}
-          {online ? "Online" : "Offline"}
+          {online ? t("common.online") : t("common.offline")}
         </span>
         {actions}
       </div>
