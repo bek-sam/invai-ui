@@ -29,7 +29,8 @@
     "pick": "Recoger",
     "press": "Prensar",
     "qc": "Control de calidad",
-    "pack": "Empacar"
+    "pack": "Empacar",
+    "receiving": "Recibir"
   },
   "scan": {
     "ready": "Escanea una transferencia",

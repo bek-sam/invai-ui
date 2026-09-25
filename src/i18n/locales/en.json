@@ -29,7 +29,8 @@
     "pick": "Pick",
     "press": "Press",
     "qc": "Quality check",
-    "pack": "Pack"
+    "pack": "Pack",
+    "receiving": "Receiving"
   },
   "scan": {
     "ready": "Scan a transfer",
