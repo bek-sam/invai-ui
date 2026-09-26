@@ -1,6 +1,7 @@
 import { UploadCloud } from "lucide-react";
 import type * as React from "react";
 import { useCallback, useId, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "../lib/cn";
 
 export interface FileDropProps {
@@ -19,10 +20,12 @@ export function FileDrop({
   accept,
   multiple = false,
   disabled = false,
-  label = "Drag a file here, or click to browse",
+  label,
   hint,
   className,
 }: FileDropProps) {
+  const { t } = useTranslation();
+  const resolvedLabel = label ?? t("fileDrop.defaultLabel", "Drag a file here, or click to browse");
   const [isDragging, setIsDragging] = useState(false);
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -63,7 +66,7 @@ export function FileDrop({
         )}
       >
         <UploadCloud className="size-8 text-muted-foreground" aria-hidden />
-        <p className="text-sm font-medium text-foreground">{label}</p>
+        <p className="text-sm font-medium text-foreground">{resolvedLabel}</p>
         {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
       </button>
       <input

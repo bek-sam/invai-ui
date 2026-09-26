@@ -1,6 +1,7 @@
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 import type * as React from "react";
+import { useTranslation } from "react-i18next";
 import { cn } from "../lib/cn";
 import { Dialog, DialogContent } from "./dialog";
 
@@ -21,8 +22,8 @@ export function CommandDialog({
   children,
   open,
   onOpenChange,
-  title = "Command menu",
-  description = "Search commands",
+  title,
+  description,
 }: {
   children: React.ReactNode;
   open: boolean;
@@ -30,11 +31,14 @@ export function CommandDialog({
   title?: string;
   description?: string;
 }) {
+  const { t } = useTranslation();
+  const resolvedTitle = title ?? t("command.menuTitle", "Command menu");
+  const resolvedDescription = description ?? t("command.searchCommands", "Search commands");
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="overflow-hidden p-0 shadow-lg" aria-describedby={undefined}>
         <span className="sr-only">
-          {title}. {description}
+          {resolvedTitle}. {resolvedDescription}
         </span>
         <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:size-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:size-5">
           {children}

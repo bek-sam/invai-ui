@@ -21,4 +21,8 @@ describe("formatMoney", () => {
   it("formats a single cent", () => {
     expect(formatMoney(1)).toBe("$0.01");
   });
+
+  it("formats in the app locale when given one (AC3)", () => {
+    expect(formatMoney(1234, "USD", "es")).toBe("12,34 US$");
+  });
 });

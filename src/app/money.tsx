@@ -1,3 +1,5 @@
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 import { cn } from "../lib/cn";
 
 export interface MoneyProps {
@@ -11,23 +13,25 @@ export interface MoneyProps {
 
 const formatterCache = new Map<string, Intl.NumberFormat>();
 
-function getFormatter(currency: string) {
-  let f = formatterCache.get(currency);
+function getFormatter(locale: string, currency: string) {
+  const key = `${locale}:${currency}`;
+  let f = formatterCache.get(key);
   if (!f) {
-    f = new Intl.NumberFormat("en-US", { style: "currency", currency });
-    formatterCache.set(currency, f);
+    f = new Intl.NumberFormat(locale, { style: "currency", currency });
+    formatterCache.set(key, f);
   }
   return f;
 }
 
 /** Formats integer cents as a localized currency string, e.g. `1234` -> `$12.34`. */
-export function formatMoney(cents: number, currency = "USD") {
-  return getFormatter(currency).format(cents / 100);
+export function formatMoney(cents: number, currency = "USD", locale = i18n.language || "en") {
+  return getFormatter(locale, currency).format(cents / 100);
 }
 
-/** Renders integer cents as `$12.34`. Negative values render with a leading minus. */
+/** Renders integer cents as `$12.34`. Negative values render with a leading minus, in the app locale. */
 export function Money({ cents, className, showSign = false, currency = "USD" }: MoneyProps) {
-  const formatted = formatMoney(Math.abs(cents), currency);
+  const { i18n: instance } = useTranslation();
+  const formatted = formatMoney(Math.abs(cents), currency, instance.language || "en");
   const sign = cents < 0 ? "-" : showSign && cents > 0 ? "+" : "";
   return (
     <span

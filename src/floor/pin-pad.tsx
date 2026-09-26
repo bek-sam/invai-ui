@@ -1,4 +1,5 @@
 import { Delete } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "../lib/cn";
 
 export interface PinPadProps {
@@ -25,6 +26,7 @@ export function PinPad({
   error = false,
   className,
 }: PinPadProps) {
+  const { t } = useTranslation();
   function press(digit: string) {
     if (disabled || value.length >= length) return;
     const next = value + digit;
@@ -82,7 +84,7 @@ export function PinPad({
           onClick={clear}
           className="flex size-20 items-center justify-center rounded-xl text-sm font-medium text-muted-foreground hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
         >
-          Clear
+          {t("pinPad.clear", "Clear")}
         </button>
         <button
           type="button"
@@ -100,7 +102,7 @@ export function PinPad({
           type="button"
           disabled={disabled}
           onClick={backspace}
-          aria-label="Backspace"
+          aria-label={t("pinPad.backspace", "Backspace")}
           className="flex size-20 items-center justify-center rounded-xl text-muted-foreground hover:bg-accent disabled:pointer-events-none disabled:opacity-50"
         >
           <Delete className="size-7" />

@@ -2,8 +2,12 @@ import type { LucideIcon } from "lucide-react";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import type * as React from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../components/tooltip";
 import { cn } from "../lib/cn";
+
+/** Id of the skip link's target; `AppShell` sets it on the scrollable main content region. */
+export const APP_SHELL_MAIN_ID = "app-shell-main";
 
 export interface AppShellNavItem {
   key: string;
@@ -51,6 +55,7 @@ export function AppShell({
   children,
   className,
 }: AppShellProps) {
+  const { t } = useTranslation();
   const [internalCollapsed, setInternalCollapsed] = useState(false);
   const collapsed = controlledCollapsed ?? internalCollapsed;
 
@@ -62,6 +67,12 @@ export function AppShell({
 
   return (
     <TooltipProvider delayDuration={200}>
+      <a
+        href={`#${APP_SHELL_MAIN_ID}`}
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
+        {t("common.skipToContent", "Skip to content")}
+      </a>
       <div
         className={cn("flex h-dvh w-full overflow-hidden bg-background text-foreground", className)}
       >
@@ -127,7 +138,11 @@ export function AppShell({
             type="button"
             onClick={toggleCollapsed}
             className="flex h-10 shrink-0 items-center justify-center border-t border-border text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-label={
+              collapsed
+                ? t("appShell.expandSidebar", "Expand sidebar")
+                : t("appShell.collapseSidebar", "Collapse sidebar")
+            }
           >
             {collapsed ? <ChevronsRight className="size-4" /> : <ChevronsLeft className="size-4" />}
           </button>
@@ -137,7 +152,9 @@ export function AppShell({
             <div className="flex min-w-0 items-center gap-3">{topBarStart}</div>
             <div className="flex shrink-0 items-center gap-3">{topBarEnd}</div>
           </header>
-          <main className="flex-1 overflow-y-auto p-6">{children}</main>
+          <main id={APP_SHELL_MAIN_ID} tabIndex={-1} className="flex-1 overflow-y-auto p-6">
+            {children}
+          </main>
         </div>
       </div>
     </TooltipProvider>

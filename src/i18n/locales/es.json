@@ -61,6 +61,28 @@
     "error": "Algo salió mal",
     "noResults": "Sin resultados",
     "offline": "Sin conexión",
-    "online": "En línea"
+    "online": "En línea",
+    "skipToContent": "Saltar al contenido",
+    "loadingMore": "Cargando más…"
+  },
+  "dataTable": {
+    "emptyTitle": "Aquí no hay nada todavía",
+    "selectAllRows": "Seleccionar todas las filas",
+    "selectRow": "Seleccionar fila"
+  },
+  "appShell": {
+    "expandSidebar": "Expandir barra lateral",
+    "collapseSidebar": "Contraer barra lateral"
+  },
+  "command": {
+    "menuTitle": "Menú de comandos",
+    "searchCommands": "Buscar comandos"
+  },
+  "fileDrop": {
+    "defaultLabel": "Arrastra un archivo aquí, o haz clic para buscarlo"
+  },
+  "pinPad": {
+    "clear": "Borrar",
+    "backspace": "Retroceso"
   }
 }

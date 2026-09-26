@@ -15,6 +15,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { ArrowDown, ArrowUp, ArrowUpDown, Loader2 } from "lucide-react";
 import type * as React from "react";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { EmptyState } from "../app/empty-state";
 import { cn } from "../lib/cn";
 import { Checkbox } from "./checkbox";
@@ -69,7 +70,7 @@ export function DataTable<TData extends RowData>({
   getRowId,
   isLoading = false,
   emptyState,
-  emptyTitle = "Nothing here yet",
+  emptyTitle,
   emptyDescription,
   enableRowSelection = false,
   rowSelection: controlledRowSelection,
@@ -86,6 +87,7 @@ export function DataTable<TData extends RowData>({
   onRowClick,
   className,
 }: DataTableProps<TData>) {
+  const { t } = useTranslation();
   const [internalRowSelection, setInternalRowSelection] = useState<RowSelectionState>({});
   const [internalColumnVisibility, setInternalColumnVisibility] = useState<ColumnVisibilityState>(
     {},
@@ -102,7 +104,7 @@ export function DataTable<TData extends RowData>({
           id: SELECT_COLUMN_ID,
           header: ({ table }) => (
             <Checkbox
-              aria-label="Select all rows"
+              aria-label={t("dataTable.selectAllRows", "Select all rows")}
               checked={
                 table.getIsAllPageRowsSelected()
                   ? true
@@ -115,7 +117,7 @@ export function DataTable<TData extends RowData>({
           ),
           cell: ({ row }) => (
             <Checkbox
-              aria-label="Select row"
+              aria-label={t("dataTable.selectRow", "Select row")}
               checked={row.getIsSelected()}
               onCheckedChange={(v) => row.toggleSelected(!!v)}
               onClick={(e) => e.stopPropagation()}
@@ -233,7 +235,12 @@ export function DataTable<TData extends RowData>({
             ) : rows.length === 0 ? (
               <tr>
                 <td colSpan={leafColumns.length} className="p-0">
-                  {emptyState ?? <EmptyState title={emptyTitle} description={emptyDescription} />}
+                  {emptyState ?? (
+                    <EmptyState
+                      title={emptyTitle ?? t("dataTable.emptyTitle", "Nothing here yet")}
+                      description={emptyDescription}
+                    />
+                  )}
                 </td>
               </tr>
             ) : (
@@ -246,6 +253,14 @@ export function DataTable<TData extends RowData>({
                 {virtualRows.map((virtualRow) => {
                   const row = rows[virtualRow.index];
                   if (!row) return null;
+                  const cells = row.getVisibleCells();
+                  // The first non-checkbox cell doubles as the row's real, keyboard-reachable
+                  // activator (a native <button>), so clicking/tapping/pressing Enter on it works
+                  // for mouse, keyboard and screen-reader users alike. The <tr> click stays as a
+                  // mouse-only convenience for the rest of the row.
+                  const activatorCellId = onRowClick
+                    ? cells.find((c) => c.column.id !== SELECT_COLUMN_ID)?.id
+                    : undefined;
                   return (
                     <tr
                       key={row.id}
@@ -257,12 +272,25 @@ export function DataTable<TData extends RowData>({
                         onRowClick && "cursor-pointer",
                       )}
                     >
-                      {row.getVisibleCells().map((cell) => (
+                      {cells.map((cell) => (
                         <td
                           key={cell.id}
                           className="p-3 align-middle [&:has([role=checkbox])]:pr-0"
                         >
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          {cell.id === activatorCellId ? (
+                            <button
+                              type="button"
+                              className="-m-3 block w-[calc(100%+1.5rem)] p-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onRowClick?.(row.original);
+                              }}
+                            >
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                            </button>
+                          ) : (
+                            flexRender(cell.column.columnDef.cell, cell.getContext())
+                          )}
                         </td>
                       ))}
                     </tr>
@@ -280,7 +308,7 @@ export function DataTable<TData extends RowData>({
         {isLoadingMore && (
           <div className="flex items-center justify-center gap-2 border-t border-border p-3 text-sm text-muted-foreground">
             <Loader2 className="size-4 animate-spin" />
-            Loading more…
+            {t("common.loadingMore", "Loading more…")}
           </div>
         )}
       </div>
