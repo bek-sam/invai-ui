@@ -84,5 +84,8 @@
   "pinPad": {
     "clear": "Borrar",
     "backspace": "Retroceso"
+  },
+  "progress": {
+    "percentLabel": "{{value}}%"
   }
 }

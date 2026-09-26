@@ -42,7 +42,10 @@
   --color-ring: oklch(0.42 0.09 195);
 
   /* Status colors, shared by StatusBadge, ScanResult, StatCard tone, etc. */
-  --color-success: oklch(0.6 0.15 150);
+  /* 0.6 measured 3.48:1 against the white foreground (fails WCAG AA's 4.5:1 for normal text,
+     axe color-contrast); 0.52 keeps the same hue/chroma (still reads as "success green") at
+     ~4.84:1. Dark mode's success pair (below) already passes at ~7.19:1, untouched. */
+  --color-success: oklch(0.52 0.15 150);
   --color-success-foreground: oklch(0.98 0 0);
   --color-warning: oklch(0.75 0.16 80);
   --color-warning-foreground: oklch(0.2 0.05 80);
