@@ -38,6 +38,14 @@ describe("formatMoney", () => {
     expect(formatMoney(123456, "USD", "en")).toBe("$1,234.56");
   });
 
+  it("formats a 3-digit en amount with an explicit locale", () => {
+    expect(formatMoney(12345, "USD", "en")).toBe("$123.45");
+  });
+
+  it("formats a negative 4-digit en amount with an explicit locale", () => {
+    expect(formatMoney(-123456, "USD", "en")).toBe("-$1,234.56");
+  });
+
   it("groups a 7-digit es amount, which already grouped correctly", () => {
     expect(formatMoney(123456789, "USD", "es")).toBe("1.234.567,89 US$");
   });
