@@ -25,6 +25,11 @@
     "on_hold": "En espera",
     "cancelled": "Cancelado"
   },
+  "confidenceBand": {
+    "high": "Confianza alta",
+    "medium": "Confianza media: pruébalo",
+    "low": "No hay suficientes datos"
+  },
   "station": {
     "pick": "Recoger",
     "press": "Prensar",

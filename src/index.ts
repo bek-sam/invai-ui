@@ -8,6 +8,7 @@ export {
   type AppShellProps,
 } from "./app/app-shell";
 export { ChannelBadge, type ChannelBadgeProps } from "./app/channel-badge";
+export { ConfidenceBadge, type ConfidenceBadgeProps } from "./app/confidence-badge";
 export { EmptyState, type EmptyStateProps } from "./app/empty-state";
 export { FileDrop, type FileDropProps } from "./app/file-drop";
 export { formatMoney, Money, type MoneyProps } from "./app/money";

@@ -21,6 +21,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  ConfidenceBadge,
   DataTable,
   type DataTableColumn,
   Dialog,
@@ -81,7 +82,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../src/index";
-import { ORDER_ITEM_STATES, CHANNELS } from "@invai/contracts";
+import { ORDER_ITEM_STATES, CHANNELS, CONFIDENCE_BANDS } from "@invai/contracts";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -330,7 +331,7 @@ export function App() {
               </Card>
             </Section>
 
-            <Section title="App: StatCard, StatusBadge, ChannelBadge, Money, ShipBy">
+            <Section title="App: StatCard, StatusBadge, ChannelBadge, ConfidenceBadge, Money, ShipBy">
               <StatCard label="Due today" value="24" delta="+3 vs yesterday" tone="warning" icon={Home} />
               <StatCard label="Revenue" value={<Money cents={482310} />} tone="success" icon={CreditCard} />
               <StatCard label="At risk" value="2" tone="danger" deltaDirection="down" delta="-1" icon={Settings} />
@@ -344,6 +345,12 @@ export function App() {
                   {CHANNELS.map((c) => (
                     <ChannelBadge key={c} channel={c} />
                   ))}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {CONFIDENCE_BANDS.map((b) => (
+                    <ConfidenceBadge key={b} band={b} />
+                  ))}
+                  <ConfidenceBadge band="low" label="Custom override label" />
                 </div>
                 <p className="text-sm">
                   <RelativeTime value={new Date(Date.now() - 3_600_000).toISOString()} /> /{" "}

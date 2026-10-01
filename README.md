@@ -46,7 +46,9 @@ header, column visibility, virtualized rows for thousands of rows, built-in load
 
 **App** — `AppShell` (collapsible sidebar with nav groups + top bar start/end slots + content),
 `PageHeader`, `StatCard`, `EmptyState`, `StatusBadge` (color-coded for every `OrderItemState` in
-`@invai/contracts`), `ChannelBadge` (neutral, no brand logos, for every `Channel`), `Money` (integer
+`@invai/contracts`), `ChannelBadge` (neutral, no brand logos, for every `Channel`), `ConfidenceBadge`
+(tone + icon + text for every `ConfidenceBand`: high → success/shield-check, medium →
+warning/flask, low → outline/question mark; `label` overrides the text), `Money` (integer
 cents → formatted `$12.34`) plus `formatMoney`, `RelativeTime`/`ShipByBadge` (ship-by turns red once
 overdue, amber inside 24h, neutral otherwise) plus `formatRelativeTime`, `FileDrop` (drag-and-drop
 upload).

@@ -25,6 +25,11 @@
     "on_hold": "On hold",
     "cancelled": "Cancelled"
   },
+  "confidenceBand": {
+    "high": "High confidence",
+    "medium": "Medium confidence: test it",
+    "low": "Not enough data"
+  },
   "station": {
     "pick": "Pick",
     "press": "Press",
