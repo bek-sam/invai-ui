@@ -108,7 +108,7 @@ export function AppShell({
                         )}
                       >
                         {Icon && <Icon className="size-4 shrink-0" aria-hidden />}
-                        {!collapsed && <span className="truncate">{item.label}</span>}
+                        <span className={collapsed ? "sr-only" : "truncate"}>{item.label}</span>
                         {!collapsed && item.badge}
                       </span>
                     );
